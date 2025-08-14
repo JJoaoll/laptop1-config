@@ -80,8 +80,21 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
+  services.xserver = {
+    libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+  
+  	# right click with two fingers 
+        clickMethod = "clickfinger";
+  	# to use the right area instead: 
+        # clickMethod = "buttonareas";
+  
+        naturalScrolling = true; 
+      };
+    };
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jjoaoll = {
     isNormalUser = true;
