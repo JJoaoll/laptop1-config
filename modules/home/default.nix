@@ -1,9 +1,8 @@
 { config, pkgs, inputs, system, ...}: {
 
   imports = [
-    # ./editor
     # ./keyboard
-    # ./programs
+    ./programs
     ./shell
     # ./i3
   ];
