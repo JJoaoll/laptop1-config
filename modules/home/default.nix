@@ -4,7 +4,7 @@
     # ./editor
     # ./keyboard
     # ./programs
-    # ./shell
+    ./shell
     # ./i3
   ];
 

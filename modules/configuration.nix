@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./keyboard
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -55,6 +56,7 @@
   services.xserver.xkb = {
     layout = "br";
     variant = "thinkpad";
+    
   };
 
   # Configure console keymap
