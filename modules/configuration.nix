@@ -6,8 +6,10 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
+      ./pkgs.nix
+      ./xmonad
       ./keyboard
       ./nvim.nix
     ];
@@ -58,7 +60,6 @@
   services.xserver.xkb = {
     layout = "br";
     variant = "thinkpad";
-    
   };
 
   # Configure console keymap
