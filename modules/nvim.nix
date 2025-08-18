@@ -1,43 +1,67 @@
-{ inputs, ... }: 
-
-
-{
+{ pkgs, inputs, ... }: {
 
   imports = [ inputs.nvf.nixosModules.default ];
 
+  environment.systemPackages = with pkgs; [
+    xclip
+    fzf
+    ripgrep
+  ];
 
-  programs.nvf = {
+  programs.nvf = { 
     enable = true;
-    
-    # Your settings need to go into the settings attribute set
-    # most settings are documented in the appendix
+
     settings = {
       vim = {
         viAlias = false;
         vimAlias = true;
+        lsp = {
+          enable = true;
+        };
 
         options = {
+          cursorline = true;
+          encoding = "UTF-8";
+          ruler = true;
+          clipboard = "unnamedplus";
           tabstop = 2;
           shiftwidth = 2;
         };
 
-        theme = {
-          enable = true;
-          name = "gruvbox"; 
-          style = "dark";
+        globals.mapleader = " ";
+        globals.maplocalleader = " ";
 
-        };
+        keymaps = [
+          {
+            key = "<C-n>";
+            mode = "n";
+            silent = true;
+            action = ":Neotree filesystem reveal left<CR>";
+          }
+
+          {
+            key = "<leader>n";
+            mode = "n";
+            silent = true;
+            action = ":Neotree filesystem close left<CR>";
+          }
+
+          {
+            key = "<C-a>";
+            mode = "i";
+            silent = true;
+            action = "<ESC> :normal! I <ENTER>";  
+          } 
+
+          {
+            key = "<C-e>";
+            mode = "i"; 
+            silent = true;
+            action = "<ESC> :normal! A <ENTER>";
+          }
 
 
-        
-        statusline.lualine = {
-          enable = true;
-          theme = "gruvbox_dark";
-        };
-
-        lsp = {
-          enable = true;
-        };
+        ];
 
         languages = {
           enableDAP = true;
@@ -45,12 +69,65 @@
           enableFormat = true;
           enableTreesitter = true;
 
-          nix.enable = true; 
+          gleam.enable = true;
+          elixir.enable = true;
           haskell.enable = true;
-        }; 
+          html.enable = true;
+          # css.enable = true;
+          nix.enable = true;
+        };
+
+        statusline.lualine = {
+          enable = true;
+          theme = "gruvbox_dark";
+        };
+
+        theme = {
+          enable = true;
+          name = "gruvbox";
+          style = "dark";
+          transparent = true;
+
+        };
+
+        filetree.neo-tree = {
+          enable = true;
+          setupOpts = {
+
+            window = {
+              width = 25;
+
+              #other things..
+            };
+
+            enable_cursor_hijack = true;
+            add_blank_line_at_top = true;
+            auto_clean_after_session_restore = true;
+            git_status_async = true;
+            # example
+            # default_source = "last";
+          };
+        };
+
+        #TODO: configure
+        dashboard.dashboard-nvim.enable = true;
+
+
+        # #TODO: neovim version or roll back
+        # dashboard.alpha = {
+        #   enable = true;
+        # };
+
+
+
+
+
+
       };
+
+
     };
   };
 
-}
 
+}
