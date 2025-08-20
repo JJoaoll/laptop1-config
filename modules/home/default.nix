@@ -4,6 +4,7 @@
     # ./keyboard
     ./programs
     ./shell
+    ./desktop-environment
     # ./i3
   ];
 
