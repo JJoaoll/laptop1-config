@@ -1,6 +1,7 @@
 { pkgs, ... }: {
 
   imports = [
+    ./polybar
     ./picom.nix
     ./rofi.nix
   ];

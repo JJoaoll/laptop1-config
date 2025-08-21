@@ -1,5 +1,6 @@
 (defcfg
-  input  (device-file "/dev/input/by-path/pci-0000:07:00.3-usb-0:4:1.0-event-kbd")
+  input (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+;;  input  (device-file "/dev/input/by-path/pci-0000:07:00.3-usb-0:4:1.0-event-kbd")
 ;;  output (uinput-sink "My KMonad Output")
   output (uinput-sink "My KMonad output"
     ;; To understand the importance of the following line, see the section on

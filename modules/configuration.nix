@@ -9,6 +9,7 @@
     [ 
       ./hardware-configuration.nix
       ./pkgs.nix
+      ./i3
       ./xmonad
       ./keyboard
       ./nvim.nix
@@ -85,7 +86,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver = {
+  services = {
     libinput = {
       enable = true;
       touchpad = {

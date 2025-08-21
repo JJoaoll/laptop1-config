@@ -13,11 +13,6 @@ let
     ./.unicodef/thatex.XCompose
   ];
 
-
-  enviroment.systemPackages = with pkgs; [
-    kmonad
-  ];
-
   combinedUnicodeComposeContent = lib.concatStringsSep "\n" (
     lib.map builtins.readFile unicodeComposeFiles
   );
@@ -32,31 +27,42 @@ let
 
 in {
 
+  #TODO: move another things to there:
+  services.xserver.xkb = {
+    options = "compose:ralt";  
+  };
+
+  environment.systemPackages = with pkgs; [
+    kmonad
+  ];
+
   services.kmonad = {
     enable = true;
     keyboards.myKMonadKeyboard = {
-      device = "/dev/input/by-path/pci-0000:07:00.3-usb-0:4:1.0-event-kbd";
+      device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
       config = builtins.readFile ./layout.kbd;
     };
   };
 
   environment.sessionVariables = {
+    XDG_SESSION_TYPE = "x11";
     XCOMPOSEFILE = "${config.users.users.${myUser}.home}/.XCompose";
   };
 
   system.activationScripts.copyXCompose = ''
+    rm -rf ${config.users.users.${myUser}.home}/.unicodef
     rm -f ${config.users.users.${myUser}.home}/.XCompose
+
     cp ${combinedXComposeFile} ${config.users.users.${myUser}.home}/.XCompose
-    chown ${myUser}:${config.users.users.${myUser}.group} ${config.users.users.${myUser}.home}/.XCompose
+
+    chown -R ${myUser}:${config.users.users.${myUser}.group} ${config.users.users.${myUser}.home}/.XCompose
   '';
 
-  # NOTA IMPORTANTE:
-  # A ativação da tecla Compose (ex: Right Alt) deve ser feita
-  # na configuração do seu compositor Wayland (Sway, Hyprland, GNOME, etc.).
-  #
-  # Exemplo para Sway/Hyprland (via home-manager):
-  # wayland.windowManager.sway.input."type:keyboard".xkb.options = [ "compose:ralt" ];
-  #
-  # Para GNOME/KDE, use as configurações de teclado da interface gráfica.
+  # system.activationScripts.copyXCompose = ''
+  #   rm -f ${config.users.users.${myUser}.home}/.XCompose
+  #   cp ${combinedXComposeFile} ${config.users.users.${myUser}.home}/.XCompose
+  #   chown ${myUser}:${config.users.users.${myUser}.group} ${config.users.users.${myUser}.home}/.XCompose
+  # '';
+
 
 }
