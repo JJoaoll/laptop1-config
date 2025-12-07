@@ -7,7 +7,9 @@
   };
 
   environment.systemPackages = [
-    pkgsUnstable.osu-lazer-bin
+    
+    pkgsUnstable.emacs      
+
     pkgsUnstable.haskellPackages.ghc       
     pkgsUnstable.haskellPackages.cabal-install
     pkgsUnstable.haskellPackages.stack

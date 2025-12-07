@@ -8,7 +8,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ./pkgs.nix
+      ./pkgs
       ./i3
       ./xmonad
       ./keyboard

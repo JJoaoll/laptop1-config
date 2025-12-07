@@ -1,11 +1,22 @@
 { pkgs, ...}: {
 
   environment.systemPackages = with pkgs; [
-    gleam
+    rustc cargo rust-analyzer rustfmt openssl pkg-config
+    vscode #sorry
+    elan
 
-    ghc
+    mysql84
+    mysql-workbench
+    
+    gleam
+    gcc
+
+
+    ghc haskellPackages.alex
+    haskellPackages.cabal-install
     cabal-install
     haskell-language-server
+
 
     haskellPackages.cabal2nix
     haskellPackages.Cabal_3_14_2_0   
