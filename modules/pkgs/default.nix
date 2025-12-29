@@ -1,6 +1,14 @@
 { pkgs, ...}: {
 
+imports = [ 
+  ./unstable-pkgs.nix
+
+];
+
   environment.systemPackages = with pkgs; [
+
+
+
     rustc cargo rust-analyzer rustfmt openssl pkg-config
     vscode #sorry
     elan
@@ -10,7 +18,6 @@
     
     gleam
     gcc
-
 
     ghc haskellPackages.alex
     haskellPackages.cabal-install

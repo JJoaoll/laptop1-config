@@ -10,9 +10,9 @@
     
     pkgsUnstable.emacs      
 
-    pkgsUnstable.haskellPackages.ghc       
-    pkgsUnstable.haskellPackages.cabal-install
-    pkgsUnstable.haskellPackages.stack
-    pkgsUnstable.haskellPackages.haskell-language-server 
+    # pkgsUnstable.haskellPackages.ghc       
+    # pkgsUnstable.haskellPackages.cabal-install
+    # pkgsUnstable.haskellPackages.stack
+    # pkgsUnstable.haskellPackages.haskell-language-server 
   ];
 }
